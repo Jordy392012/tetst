@@ -13,7 +13,7 @@ jobs:
     with:
       build: |
         set -euo pipefail
-        unzip -q AURORA-FM1-fm1-port-source-fixed.zip -d .
+        unzip -q AURORA-FM1-fm1-port-source-fixed2.zip -d .
         git clone --recursive https://github.com/charlesvestal/fm1-base.git
         git -C fm1-base checkout 317cb86cc60d6286fa80a02743e94e6a60ff842d
         git -C fm1-base submodule update --init --recursive
