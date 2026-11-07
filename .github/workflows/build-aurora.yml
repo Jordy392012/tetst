@@ -13,8 +13,7 @@ jobs:
     with:
       build: |
         set -euo pipefail
-        unzip -q AURORA-FM1-fm1-port-source.zip -d .
-        sed -i '1i# url: https://raw.githubusercontent.com/Jordy392012/tetst/main/' AURORA-FM1/fm1/words.tsv
+        unzip -q AURORA-FM1-fm1-port-source-fixed.zip -d .
         git clone --recursive https://github.com/charlesvestal/fm1-base.git
         git -C fm1-base checkout 317cb86cc60d6286fa80a02743e94e6a60ff842d
         git -C fm1-base submodule update --init --recursive
