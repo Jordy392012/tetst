@@ -1,0 +1,24 @@
+name: Build AURORA FM-1 firmware
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: zvenson/fm1-build/.github/workflows/build.yml@v1
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+    with:
+      build: |
+        set -euo pipefail
+        unzip -q AURORA-FM1-fm1-port-source.zip -d .
+        git clone --recursive https://github.com/charlesvestal/fm1-base.git
+        git -C fm1-base checkout 317cb86cc60d6286fa80a02743e94e6a60ff842d
+        git -C fm1-base submodule update --init --recursive
+        sh AURORA-FM1/fm1/build.sh host
+        sh AURORA-FM1/fm1/build.sh firmware
+      test: sh AURORA-FM1/fm1/tests/run_target.sh
+      packages: AURORA-FM1/fm1/build/aurora.fwsc
+      sdk: true
